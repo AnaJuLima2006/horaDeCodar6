@@ -1,8 +1,8 @@
 //Hora de Codar Seis, Exercício Um!!
 //Agenda
 //Considerando a necessidade de desenvolver uma agenda que contenha nomes, endereços
-// e  telefones de 10 pessoas, defina a estrutura de registro, o diagrama de blocos
-// e a  transferência de um programa que por meio do uso de um menu de opções,
+// e telefones de 10 pessoas, defina a estrutura de registro, o diagrama de blocos
+// e a transferência de um programa que por meio do uso de um menu de opções,
 // execute as seguintes  etapas:
 //a) Cadastrar os 10 registros.
 //b) Pesquisar um dos 10 registros de cada vez pelo campo nome
@@ -11,6 +11,7 @@
 //d) Apresentar todos os registros.
 //e) Sair do programa de cadastro.
 
+//Sublasse endereço
 data class Endereco(
     val logradouro : String,
     val bairro : String,
@@ -20,6 +21,8 @@ data class Endereco(
     val estado : String,
     val cidade : String
 )
+
+//Classe pessoa (contém subclasse endereço como campo
 data class Pessoa(
     val nome : String,
     val telefone : String,
