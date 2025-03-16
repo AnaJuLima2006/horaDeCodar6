@@ -9,7 +9,7 @@
 //b) Pesquisar os 20 registros, de cada vez, por campo nome. Nesta pesquisa o
 // programa deverá também apresente a média do aluno e as mensagens: “Aprovado”
 // caso sua média seja maior ou igual a 5, ou “Reprovado” para média abaixo de 5.
-//c) Apresentar todos os registros, mídias e mensagens de aprovação ou reprovação.
+//c) Apresentar todos os registros, médias e mensagens de aprovação ou reprovação.
 //d) Sair do programa de cadastro.
 
 data class Bimestre(
@@ -39,8 +39,11 @@ fun main(){
         when(opcao){
             1 -> cadastrar(notas)
             2 -> pesquisarPorNome(notas)
+            3 -> exibirRegistros(notas)
+            4 -> println("Saindo do programa...")
+            else -> println("Opção inválida. Tente novamente.")
         }
-    }while (opcao != 5)
+    }while (opcao != 4)
 
 }
 //Função para verificar se o número é um inteiro positivo
@@ -87,13 +90,13 @@ fun cadastrar(notas: MutableList<Estudante>){
         val bimestre = Bimestre(notaUm, notaDois, notaTres, notaQuatro)
         val estudante = Estudante(nome, bimestre)
         notas.add(estudante)
-
-        classificarPeloNome(notas)
     }
+    classificarPeloNome(notas)
     println("Cadastro concluído!\n")
 }
-fun calcularMedia(notas: List<Estudante>){
-
+fun calcularMedia(bimestre: Bimestre) : Double{
+    return(bimestre.notaUm + bimestre.notaDois +
+            bimestre.notaTres + bimestre.notaQuatro) / 4
 }
 //Função menu 2
 fun pesquisarPorNome(notas: List<Estudante>){
@@ -104,7 +107,31 @@ fun pesquisarPorNome(notas: List<Estudante>){
         println("Registro encontrado\n")
         println("Nome: ${retorno.nome}")
         println("Notas bimestrais: ${retorno.bimestre}")
+
+        val media = calcularMedia(retorno.bimestre)
+        println("Média: $media")
+
+        if (media >= 5){
+            println("Situação: Aprovado.")
+        }else{
+            println("Situação: Reprovado.")
+        }
     }else{
         println("Não foi encontrado nenhum registro com nome '$nomePesquisado'")
+    }
+}
+//Função menu 3
+fun exibirRegistros(notas: List<Estudante>){
+    notas.forEach { estudante ->
+        val media = calcularMedia(estudante.bimestre)
+        println("Nome: ${estudante.nome}")
+        println("Notas bimestrais: ${estudante.bimestre}")
+        println("Média: $media")
+        if (media >= 5) {
+            println("Situação: Aprovado")
+        } else {
+            println("Situação: Reprovado")
+        }
+        println("_______________________________\n")
     }
 }
