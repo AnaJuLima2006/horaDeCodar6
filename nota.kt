@@ -1,3 +1,4 @@
+//Hora de Codar Seis, Exercício Dois!!
 //Qual a nota?
 //Considerando a necessidade de um programa que armazene o nome e as notas
 // bimestrais de 20  aulas do curso de Técnicas de Programação, defina a
@@ -17,7 +18,12 @@ data class Bimestre(
     val notaDois : Double,
     val notaTres : Double,
     val notaQuatro: Double,
-)
+){
+    //Sobrescrevendo o método toString() para exibir apenas os campos
+    override fun toString(): String {
+        return "\nNota Um - $notaUm \nNota Dois - $notaDois \nNota Tres - $notaTres \nNota Quatro - $notaQuatro \n"
+    }
+}
 data class Estudante(
     val nome : String,
     val bimestre : Bimestre
@@ -35,7 +41,7 @@ fun main(){
 
         var opcao = readln().toInt()
 
-        println("A opção selecionada foi: " + opcao + "\n")
+        println("A opção selecionada foi: $opcao \n")
         when(opcao){
             1 -> cadastrar(notas)
             2 -> pesquisarPorNome(notas)
@@ -47,14 +53,14 @@ fun main(){
 
 }
 //Função para verificar se o número é um inteiro positivo
-fun verificarNumeroPositivo(mensagem: String): Int {
+fun verificarNumeroRealPositivo(mensagem: String): Double {
     while (true) {
         println(mensagem)
-        val valor = readln().trim()
-        if (valor.isNotEmpty() && valor.all { it.isDigit() } && valor.toInt() > 0) {
-            return valor.toInt()
+        val valor = readlnOrNull()?.toDoubleOrNull()
+        if (valor != null && valor >= 0) {
+            return valor
         } else {
-            println("Valor inválido. Por favor, insira um número inteiro positivo.")
+            println("Valor inválido. Por favor, insira um número real positivo.")
         }
     }
 }
@@ -77,15 +83,18 @@ fun classificarPeloNome(notas: MutableList<Estudante>){
 }
 //Função menu 1
 fun cadastrar(notas: MutableList<Estudante>){
-
+    if (notas.size >= 20) {
+        println("Voce já está registrou todas as notas (20 registros).")
+        return
+    }
     for (i in 1..20){
         println("Dados pessoais $i º\n")
-        val nome = verificarSeDigitou("Digite o nome $i:")
+        val nome = verificarSeDigitou("Digite o nome $i º:")
         println("Notas do Bimestre $i º\n")
-        val notaUm = verificarNumeroPositivo("Digite a nota um do $i º estudante:").toDouble()
-        val notaDois = verificarNumeroPositivo("Digite a nota dois do $i º estudante:").toDouble()
-        val notaTres = verificarNumeroPositivo("Digite a nota três do $i º estudante:").toDouble()
-        val notaQuatro = verificarNumeroPositivo("Digite a nota quatro do $i º estudante :").toDouble()
+        val notaUm = verificarNumeroRealPositivo("Digite a nota um do $i º estudante:").toDouble()
+        val notaDois = verificarNumeroRealPositivo("Digite a nota dois do $i º estudante:").toDouble()
+        val notaTres = verificarNumeroRealPositivo("Digite a nota três do $i º estudante:").toDouble()
+        val notaQuatro = verificarNumeroRealPositivo("Digite a nota quatro do $i º estudante :").toDouble()
 
         val bimestre = Bimestre(notaUm, notaDois, notaTres, notaQuatro)
         val estudante = Estudante(nome, bimestre)
