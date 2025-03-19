@@ -137,9 +137,9 @@ fun exibirRegistros(notas: List<Estudante>){
         println("Notas bimestrais: ${estudante.bimestre}")
         println("Média: $media")
         if (media >= 5) {
-            println("Situação: Aprovado")
+            println("Situação: Aprovado.")
         } else {
-            println("Situação: Reprovado")
+            println("Situação: Reprovado.")
         }
         println("_______________________________\n")
     }
