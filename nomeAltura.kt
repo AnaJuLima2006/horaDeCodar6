@@ -41,7 +41,7 @@ fun main(){
             6 -> println("Saindo do programa...")
             else -> println("Opção inválida. Tente novamente.")
         }
-    }while (opcao != 4)
+    }while (opcao != 5)
 
 }
 //Função para verificar se a pessoa digitou algo
@@ -114,7 +114,8 @@ fun calcularMediaDeAlturas(dados: List<Pessoas>){
     if (dados.isEmpty()){
         println("Não há nenhum dado cadastrado para calcular média.")
     }else{
-        val media = dados.map { it.altura }.average()
+        val media = dados.map { it.altura }.average() // Percorre a lista 
+        //e pega somente a altura (map), depois calcula a media (avarege)
         println("A média das alturas é: ${"%.2f".format(media)}m\n")
     }
 }
